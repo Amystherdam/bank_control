@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bank agencies</h1>
+
+<div id="bank_agencies">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Agency Number</th>
+      <th scope="col">Address</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @bank_agencies.each do |bank_agency| %>
+    <tr>
+      <%= render bank_agency %>
+      <td>
+        <%= link_to "Show", bank_agency %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+<%= link_to "New bank agency", new_bank_agency_path %>

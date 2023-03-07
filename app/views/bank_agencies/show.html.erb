@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Address</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= render @bank_agency %>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this bank agency", edit_bank_agency_path(@bank_agency) %> |
+  <%= link_to "Back to bank agencies", bank_agencies_path %>
+
+  <%= button_to "Destroy this bank agency", @bank_agency, method: :delete %>
+</div>
