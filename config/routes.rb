@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :account_transactions, except: :destroy
   devise_for :users
   resources :bank_accounts
   resources :bank_agencies

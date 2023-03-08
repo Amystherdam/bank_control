@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Bank Account</th>
+      <th scope="col">Transaction Limit</th>
+      <th scope="col">Bank Agency</th>
+      <th scope="col">User</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= render @account_transaction %>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this account transaction", edit_account_transaction_path(@account_transaction) %> |
+  <%= link_to "Back to account transactions", account_transactions_path %>
+</div>

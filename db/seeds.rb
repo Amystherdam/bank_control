@@ -1,7 +1,32 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+user = User.create!(
+  email: Faker::Internet.email, 
+  password: '12345678'
+)
+
+bank_agency = BankAgency.create!(
+  agency_number: Faker::Number.number(digits: 4), 
+  address: Faker::Address.street_address
+)
+
+4.times do |i|
+  # create variety in the database
+  variable_name = "@bank_account_#{i}"
+
+  instance_variable_set(variable_name, BankAccount.create!(
+    account_number: Faker::Bank.account_number, 
+    transaction_limit: Faker::Number.number(digits: 6),
+    bank_agency:
+  ))
+end
+
+6.times do |i|
+  # create variety in the database
+  i < 4 ? variable_name = "@bank_account_#{i}" : variable_name = "@bank_account_1" 
+
+  AccountTransaction.create!(
+    transaction_value: Faker::Number.number(digits: 6),
+    kind: :deposit, 
+    bank_account: instance_variable_get(variable_name),
+    user:
+  )
+end
