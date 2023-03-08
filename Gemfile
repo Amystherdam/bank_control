@@ -18,11 +18,12 @@ gem "puma", "~> 5.0"
 # Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 gem 'devise'
 
+gem 'faker', '~> 3.1'
+
 group :development, :test do
   gem 'database_cleaner-active_record', '~> 2.0'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 3.1'
   gem 'rspec-rails', '~> 6.0'
   gem 'shoulda-matchers', '~> 5.3'
 end
