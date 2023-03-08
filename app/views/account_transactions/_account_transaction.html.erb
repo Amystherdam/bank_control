@@ -1,6 +1,6 @@
 <div id="<%= dom_id account_transaction %>">
   <td>
-    <%= account_transaction.transaction_value %>
+    R$ <%= cent_to_real(account_transaction.transaction_value) %>
   </td>
 
   <td>
@@ -8,15 +8,15 @@
   </td>
 
   <td>
-    <%= account_transaction.bank_account_id %>
+    <%= account_transaction.bank_account.account_number %>
   </td>
 
   <td>
-    <%= account_transaction.user_id %>
+    <%= account_transaction.user.email %>
   </td>
 
   <td>
-    <%= account_transaction.created_at %>
+    <%= account_transaction.created_at.strftime("%d/%m/%Y %H:%M") %>
   </td>
 
 </div>

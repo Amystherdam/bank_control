@@ -4,10 +4,10 @@
   </td>
 
   <td>
-    <%= bank_account.transaction_limit %>
+    R$ <%= cent_to_real(bank_account.transaction_limit) %>
   </td>
 
   <td>
-    <%= bank_account.bank_agency_id %>
+    <%= bank_account.bank_agency.agency_number %>
   </td>
 </div>
