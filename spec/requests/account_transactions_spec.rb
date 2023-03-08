@@ -16,9 +16,9 @@ RSpec.describe "/account_transactions", type: :request do
 
   let(:invalid_attributes) do
     {
-      transaction_value: nil,
+      transaction_value: 1000,
       kind: nil,
-      bank_account: nil,
+      bank_account_id: bank_account.id,
       user: nil
     }
   end

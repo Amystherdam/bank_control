@@ -20,12 +20,16 @@ class AccountTransactionsController < ApplicationController
   def create
     @account_transaction = AccountTransaction.new(account_transaction_params)
 
-    if @account_transaction.save
-      @transaction_service.update_account_balance(@account_transaction)
+    if @transaction_service.allow_transaction(@account_transaction)
+      if @account_transaction.save
+        @transaction_service.update_account_balance(@account_transaction)
 
-      redirect_to @account_transaction, notice: "Account transaction was successfully created."
+        redirect_to @account_transaction, notice: "Account transaction was successfully created."
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_account_transaction_path, notice: "High value transaction, check your limit per transaction"
     end
   end
 

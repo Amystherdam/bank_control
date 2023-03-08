@@ -21,4 +21,9 @@ class TransactionService
       destination_bank_account.save!
     end
   end
+
+  def allow_transaction(account_transaction)
+    bank_account = BankAccount.find(account_transaction.bank_account_id)
+    account_transaction.transaction_value <= bank_account.transaction_limit
+  end
 end
