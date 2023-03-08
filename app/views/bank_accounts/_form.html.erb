@@ -21,10 +21,10 @@
     <%= form.text_field :transaction_limit, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :bank_agency_id, class: "form-label" %>
-    <%= form.text_field :bank_agency_id, class: "form-control" %>
-  </div>
+<div class="mb-3">
+  <%= form.label :agency_number, class: "form-label" %>
+  <%= form.collection_select :agency_number, @agency_numbers, :to_s, :to_s, { selected: @selected_agency_number }, { class: "form-control" } %>
+</div>
 
   <div>
     <%= form.submit "Submit", class: "btn btn-primary" %>

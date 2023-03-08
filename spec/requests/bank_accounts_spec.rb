@@ -1,24 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "/bank_accounts", type: :request do
-  let(:bank_agency) {create(:bank_agency)}
-
+  
+  let(:bank_agency) { create(:bank_agency) }
+  let(:bank_account) { create(:bank_account, bank_agency:) }
+  
   let(:valid_attributes) do
     {
       account_number: "0001",
       transaction_limit: 1,
-      bank_agency_id: bank_agency.id
+      agency_number: bank_agency.agency_number
     }
   end
-
+  
   let(:invalid_attributes) do
     {
       account_number: nil,
       transaction_limit: nil,
-      bank_agency_id: nil
+      agency_number: nil
     }
   end
-
+  
   before do
     user = create(:user)
     sign_in user
@@ -26,7 +28,7 @@ RSpec.describe "/bank_accounts", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      BankAccount.create! valid_attributes
+      bank_account
       get bank_accounts_url
       expect(response).to be_successful
     end
@@ -34,7 +36,7 @@ RSpec.describe "/bank_accounts", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      bank_account = BankAccount.create! valid_attributes
+      bank_account
       get bank_account_url(bank_account)
       expect(response).to be_successful
     end
@@ -49,7 +51,7 @@ RSpec.describe "/bank_accounts", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      bank_account = BankAccount.create! valid_attributes
+      bank_account
       get edit_bank_account_url(bank_account)
       expect(response).to be_successful
     end
@@ -90,18 +92,20 @@ RSpec.describe "/bank_accounts", type: :request do
       let(:new_attributes) do
         {
           account_number: "0000",
+          transaction_limit: 1,
+          agency_number: bank_agency.agency_number
         }
       end
 
       it "updates the requested bank_account" do
-        bank_account = BankAccount.create! valid_attributes
+        bank_account
         patch bank_account_url(bank_account), params: { bank_account: new_attributes }
         bank_account.reload
         expect(bank_account.account_number).to eq(new_attributes[:account_number])
       end
 
       it "redirects to the bank_account" do
-        bank_account = BankAccount.create! valid_attributes
+        bank_account
         patch bank_account_url(bank_account), params: { bank_account: new_attributes }
         bank_account.reload
         expect(response).to redirect_to(bank_account_url(bank_account))
@@ -111,7 +115,7 @@ RSpec.describe "/bank_accounts", type: :request do
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        bank_account = BankAccount.create! valid_attributes
+        bank_account
         patch bank_account_url(bank_account), params: { bank_account: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -121,14 +125,14 @@ RSpec.describe "/bank_accounts", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested bank_account" do
-      bank_account = BankAccount.create! valid_attributes
+      bank_account
       expect {
         delete bank_account_url(bank_account)
       }.to change(BankAccount, :count).by(-1)
     end
 
     it "redirects to the bank_accounts list" do
-      bank_account = BankAccount.create! valid_attributes
+      bank_account
       delete bank_account_url(bank_account)
       expect(response).to redirect_to(bank_accounts_url)
     end
