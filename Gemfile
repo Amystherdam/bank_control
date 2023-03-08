@@ -8,6 +8,8 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
+gem "jsbundling-rails", "~> 1.0.2"
+gem "cssbundling-rails", "~> 1.1.1"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
