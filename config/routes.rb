@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bank_accounts
   resources :bank_agencies
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
