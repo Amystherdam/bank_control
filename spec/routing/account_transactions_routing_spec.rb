@@ -15,7 +15,7 @@ RSpec.describe AccountTransactionsController, type: :routing do
     end
 
     it "routes to #edit" do
-      expect(get: "/account_transactions/1/edit").to route_to("account_transactions#edit", id: "1")
+      expect(get: "/account_transactions/1/edit").not_to route_to("account_transactions#edit", id: "1")
     end
 
 
@@ -24,11 +24,11 @@ RSpec.describe AccountTransactionsController, type: :routing do
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/account_transactions/1").to route_to("account_transactions#update", id: "1")
+      expect(put: "/account_transactions/1").not_to route_to("account_transactions#update", id: "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/account_transactions/1").to route_to("account_transactions#update", id: "1")
+      expect(patch: "/account_transactions/1").not_to route_to("account_transactions#update", id: "1")
     end
 
     it "routes to #destroy" do

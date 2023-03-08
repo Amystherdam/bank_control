@@ -23,10 +23,17 @@ end
   # create variety in the database
   i < 4 ? variable_name = "@bank_account_#{i}" : variable_name = "@bank_account_1" 
 
-  AccountTransaction.create!(
+  account_transaction = AccountTransaction.create!(
     transaction_value: Faker::Number.number(digits: 6),
     kind: :deposit, 
     bank_account: instance_variable_get(variable_name),
     user:
+  )
+
+  transaction_service = TransactionService.new
+  transaction_service.update_account_balance(
+    account_transaction.kind, 
+    account_transaction.transaction_value, 
+    account_transaction.bank_account_id
   )
 end

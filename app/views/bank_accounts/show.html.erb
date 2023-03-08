@@ -6,11 +6,15 @@
       <th scope="col">Bank Account</th>
       <th scope="col">Transaction Limit</th>
       <th scope="col">Bank Agency</th>
+      <th scope="col">Account Balance</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <%= render @bank_account %>
+      <td>
+        R$ <%= cent_to_real(@bank_account.account_balance) %>
+      </td>
     </tr>
   </tbody>
 </table>
