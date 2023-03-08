@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
   <div class="mb-3">
     <%= form.label :transaction_value, class: "form-label" %>
     <%= form.number_field :transaction_value, class: "form-control" %>
@@ -18,22 +20,17 @@
 
   <div class="mb-3">
     <%= form.label :kind, class: "form-label" %>
-    <%= form.text_field :kind, class: "form-control" %>
+    <%= form.collection_select :kind, @kinds, :to_s, :to_s, { class: "form-control" } %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :bank_account_id, class: "form-label" %>
-    <%= form.text_field :bank_account_id, class: "form-control" %>
+    <%= form.label "Bank Account", class: "form-label" %>
+    <%= form.text_field :source_account, class: "form-control" %>
   </div>
 
   <div class="mb-3">
     <%= form.label :destination_bank_account, class: "form-label" %>
     <%= form.text_field :destination_bank_account, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :user_id, class: "form-label" %>
-    <%= form.text_field :user_id, class: "form-control" %>
   </div>
 
   <div>

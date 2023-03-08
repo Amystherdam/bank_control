@@ -12,7 +12,7 @@ class TransactionService
       bank_account.account_balance -= account_transaction.transaction_value
       bank_account.save!
     when "reversal", "transfer"
-      destination_bank_account = BankAccount.find(account_transaction.destination_bank_account)
+      destination_bank_account = BankAccount.find_by(account_number: account_transaction.destination_bank_account)
 
       bank_account.account_balance -= account_transaction.transaction_value
       bank_account.save!

@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "/account_transactions", type: :request do
   
-  let(:bank_account) { create(:bank_account) }
+
   let(:user) { create(:user) }
+  let(:bank_account) { create(:bank_account) }
+  let(:account_transaction) { create(:account_transaction, bank_account:, user:) }
 
   let(:valid_attributes) do
     {
       transaction_value: "1000",
       kind: :deposit,
-      bank_account_id: bank_account.id,
+      source_account: bank_account.account_number,
       user_id: user.id
     }
   end
@@ -18,8 +20,8 @@ RSpec.describe "/account_transactions", type: :request do
     {
       transaction_value: 1000,
       kind: nil,
-      bank_account_id: bank_account.id,
-      user: nil
+      source_account: bank_account.account_number,
+      user: user.id
     }
   end
 
@@ -30,7 +32,7 @@ RSpec.describe "/account_transactions", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      AccountTransaction.create! valid_attributes
+      account_transaction
       get account_transactions_url
       expect(response).to be_successful
     end
@@ -38,7 +40,7 @@ RSpec.describe "/account_transactions", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      account_transaction = AccountTransaction.create! valid_attributes
+      account_transaction
       get account_transaction_url(account_transaction)
       expect(response).to be_successful
     end
