@@ -16,6 +16,11 @@ RSpec.describe "/bank_agencies", type: :request do
     }
   end
 
+  before do
+    user = create(:user)
+    sign_in user
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
       BankAgency.create! valid_attributes
