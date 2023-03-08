@@ -5,4 +5,5 @@ class BankAccount < ApplicationRecord
   attr_accessor :agency_number
 
   validates_presence_of :account_number, :transaction_limit, :bank_agency
+  validates :account_number, uniqueness: true
 end
